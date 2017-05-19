@@ -18,6 +18,7 @@ Option Explicit
 '################################################
 Sub main()
 Dim ArgCount
+Dim objFSO
 ArgCount = WScript.Arguments.Count
 Select Case ArgCount 
 	Case 1	
@@ -41,7 +42,10 @@ Select Case ArgCount
 					flag=flag+1
 				End If 	
 			Next 
-			'WScript.Echo "Totally " & FileNumber & " files in the folder and convert " & flag & " Word Documents to PDF fles."
+			'WScript.Echo "Totally " & FileNumber & " files in the folder and convert " & flag & " Word Documents to PDF fles."	
+			Const DeleteReadOnly = TRUE
+			Set objFSO = CreateObject("Scripting.FileSystemObject")
+			objFSO.DeleteFile(DocPaths+"\*.doc"), DeleteReadOnly
 				
 		Else 
 			If GetWordFile(DocPaths) Then  'if the object is a file,then check if the file is a Word document.if that, convert it 
@@ -55,7 +59,10 @@ Select Case ArgCount
 			
 	Case  Else 
 	 	WScript.Echo "Please drag a word document or a folder with word documents."
+		
+	
 End Select 
+
 End Sub 
 
 Function ConvertWordToPDF(DocPath)  'This function is to convert a word document to pdf file
@@ -70,7 +77,10 @@ Function ConvertWordToPDF(DocPath)  'This function is to convert a word document
 	doc.close
 	wordapp.quit
 	Set objshell = Nothing 
+	
 End Function 
+
+
 
 Function GetWordFile(DocPath) 'This function is to check if the file is a Word document
 	Dim objshell
