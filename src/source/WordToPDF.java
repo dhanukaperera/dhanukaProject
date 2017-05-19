@@ -5,9 +5,7 @@
  */
 package source;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 /**
  *
@@ -18,8 +16,8 @@ public class WordToPDF {
     final static String SCRIPTPATH = "src\\script\\ConvertWordToPDF.vbs";
 
     public static void main(String[] args) throws IOException {
-
-        //String vbScriptPATH = "src\\script\\ConvertWordToPDF.vbs";
+        
+        // Put the document path here. This is just for testing...
         String docPATH = "C:\\javaTest";
         Convert(docPATH);
 
