@@ -17,7 +17,7 @@ public class WordToPDF {
 
     final static String SCRIPTPATH = "src\\script\\ConvertWordToPDF.vbs";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         //String vbScriptPATH = "src\\script\\ConvertWordToPDF.vbs";
         String docPATH = "C:\\javaTest";
@@ -29,10 +29,10 @@ public class WordToPDF {
         return SCRIPTPATH;
     }
 
-    public static void Convert(String pdocPATH) {
+    public static void Convert(String pdocPATH) throws IOException {
         try {
             Runtime.getRuntime().exec("wscript " +"\""+SRCIPTPATH()+"\""+ " " +"\""+pdocPATH+"\"");
-           removeDocs();
+          
         } catch (IOException e) {
             System.out.println(e);
             System.exit(0);
@@ -40,19 +40,5 @@ public class WordToPDF {
 
     }
 
-    public static void removeDocs() throws IOException {
-        ProcessBuilder builder = new ProcessBuilder(
-                "cmd.exe", "/c", "cd \"C:\\javaTest\" &&  del *.doc");
-        builder.redirectErrorStream(true);
-        Process p = builder.start();
-        BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
-        String line;
-        while (true) {
-            line = r.readLine();
-            if (line == null) {
-                break;
-            }
-            System.out.println(line);
-        }
-    }
+ 
 }
